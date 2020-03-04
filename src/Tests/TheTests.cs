@@ -18,6 +18,14 @@ public class TheTests :
     }
     #endregion
 
+    #region UserControlUsage
+    [Fact]
+    public Task UserControlUsage()
+    {
+        return Verify(new MyUserControl());
+    }
+    #endregion
+
     #region ControlUsage
     [Fact]
     public Task ControlUsage()

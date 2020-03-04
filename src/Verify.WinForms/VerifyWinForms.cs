@@ -10,7 +10,8 @@ namespace Verify
         public static void Enable()
         {
             SharedVerifySettings.RegisterFileConverter<Form>("png", FormToImage);
-            SharedVerifySettings.RegisterFileConverter<Control>("png", FormToImage);
+            SharedVerifySettings.RegisterFileConverter<Control>("png", ControlToImage);
+            SharedVerifySettings.RegisterFileConverter<UserControl>("png", ControlToImage);
         }
 
         static ConversionResult FormToImage(Form form, VerifySettings settings)
@@ -18,7 +19,7 @@ namespace Verify
             return new ConversionResult(null, FormToStream(form));
         }
 
-        static ConversionResult FormToImage(Control control, VerifySettings settings)
+        static ConversionResult ControlToImage(Control control, VerifySettings settings)
         {
             using var form = new Form
             {
