@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using WindowsFormsApp1;
-using Shipwreck.Phash;
-using Shipwreck.Phash.Bitmaps;
 using Verify;
 using VerifyXunit;
 using Xunit;
@@ -19,25 +18,27 @@ public class TheTests :
     }
     #endregion
 
+    #region ControlUsage
+    [Fact]
+    public Task ControlUsage()
+    {
+        return Verify(
+            new Button
+            {
+                BackColor = Color.LightBlue,
+                Text = "Help"
+            });
+    }
+    #endregion
+
     public TheTests(ITestOutputHelper output) :
         base(output)
     {
+        SharedVerifySettings.UniqueForRuntime();
     }
 
     static TheTests()
     {
-        SharedVerifySettings.RegisterComparer(
-            "png",
-            (stream1, stream2) =>
-            {
-                var bitmap1 = (Bitmap)Image.FromStream(stream1);
-                var hash1 = ImagePhash.ComputeDigest(bitmap1.ToLuminanceImage());
-                var bitmap2 = (Bitmap)Image.FromStream(stream2);
-                var hash2 = ImagePhash.ComputeDigest(bitmap2.ToLuminanceImage());
-
-                var score = ImagePhash.GetCrossCorrelation(hash1, hash2);
-
-                return score > .999;
-            });
+        VerifyPhash.RegisterComparer("png", .99f);
     }
 }

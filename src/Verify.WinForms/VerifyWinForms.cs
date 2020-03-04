@@ -20,9 +20,15 @@ namespace Verify
 
         static ConversionResult FormToImage(Control control, VerifySettings settings)
         {
-            using var form = new Form();
+            using var form = new Form
+            {
+                Width = control.Width,
+                Height = control.Height
+            };
             form.Controls.Add(control);
-            return new ConversionResult(null, FormToStream(form));
+            form.ShowInTaskbar = false;
+            form.Show();
+            return new ConversionResult(null, ControlToImage(control));
         }
 
         static Stream FormToStream(Form form)
