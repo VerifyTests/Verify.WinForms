@@ -5,9 +5,9 @@ Source File: /readme.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
-# <img src="/src/icon.png" height="30px"> Verify.Xaml
+# <img src="/src/icon.png" height="30px"> Verify.WinForms
 
-[![Build status](https://ci.appveyor.com/api/projects/status/o2iy3b7k9le0ntps?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-winforms)
+[![Build status](https://ci.appveyor.com/api/projects/status/lgjcs6xhxhhw0f02?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-winforms)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.WinForms.svg)](https://www.nuget.org/packages/Verify.WinForms/)
 
 Extends [Verify](https://github.com/SimonCropp/Verify) to allow verification of WinForms UIs.
