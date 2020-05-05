@@ -7,10 +7,10 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 # <img src="/src/icon.png" height="30px"> Verify.WinForms
 
-[![Build status](https://ci.appveyor.com/api/projects/status/lgjcs6xhxhhw0f02?svg=true)](https://ci.appveyor.com/project/SimonCropp/verify-winforms)
+[![Build status](https://ci.appveyor.com/api/projects/status/lgjcs6xhxhhw0f02?svg=true)](https://ci.appveyor.com/project/VerifyTests/verify-winforms)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.WinForms.svg)](https://www.nuget.org/packages/Verify.WinForms/)
 
-Extends [Verify](https://github.com/SimonCropp/Verify) to allow verification of WinForms UIs.
+Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of WinForms UIs.
 
 Support is available via a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-verify.winforms?utm_source=nuget-verify.winforms&utm_medium=referral&utm_campaign=enterprise).
 
@@ -64,7 +64,7 @@ With the state of the element being rendered as a verified file:
 
 The rendering of Form elements can very slightly between different OS versions. This can make verification on different machines (eg CI) problematic. There are several approaches to mitigate this:
 
- * Using a [custom comparer](https://github.com/SimonCropp/Verify/blob/master/docs/comparer.md)
+ * Using a [custom comparer](https://github.com/VerifyTests/Verify/blob/master/docs/comparer.md)
 
 
 ## Security contact information
