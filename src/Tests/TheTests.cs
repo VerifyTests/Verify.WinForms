@@ -3,34 +3,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 using Verify;
-using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
+using VerifyNUnit;
+using NUnit.Framework;
 
-public class TheTests :
-    VerifyBase
+[TestFixture]
+public class TheTests
 {
     #region FormUsage
-    [Fact]
+    [Test]
     public Task FormUsage()
     {
-        return Verify(new MyForm());
+        return Verifier.Verify(new MyForm());
     }
     #endregion
 
     #region UserControlUsage
-    [Fact]
+    [Test]
     public Task UserControlUsage()
     {
-        return Verify(new MyUserControl());
+        return Verifier.Verify(new MyUserControl());
     }
     #endregion
 
     #region ControlUsage
-    [Fact]
+    [Test]
     public Task ControlUsage()
     {
-        return Verify(
+        return Verifier.Verify(
             new Button
             {
                 BackColor = Color.LightBlue,
@@ -39,14 +38,9 @@ public class TheTests :
     }
     #endregion
 
-    public TheTests(ITestOutputHelper output) :
-        base(output)
-    {
-        SharedVerifySettings.UniqueForRuntime();
-    }
-
     static TheTests()
     {
+        SharedVerifySettings.UniqueForRuntime();
         VerifyPhash.RegisterComparer("png", .99f);
     }
 }
