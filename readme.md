@@ -36,7 +36,7 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/GlobalSetup.cs#L9-L11' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L43-L45' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
 <!-- endsnippet -->
 
 A visual element (Form/Control etc) can then be verified as follows:
@@ -44,13 +44,13 @@ A visual element (Form/Control etc) can then be verified as follows:
 <!-- snippet: FormUsage -->
 <a id='snippet-formusage'/></a>
 ```cs
-[Fact]
+[Test]
 public Task FormUsage()
 {
-    return Verify(new MyForm());
+    return Verifier.Verify(new MyForm());
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L13-L19' title='File snippet `formusage` was extracted from'>snippet source</a> | <a href='#snippet-formusage' title='Navigate to start of snippet `formusage`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L12-L18' title='File snippet `formusage` was extracted from'>snippet source</a> | <a href='#snippet-formusage' title='Navigate to start of snippet `formusage`'>anchor</a></sup>
 <!-- endsnippet -->
 
 With the state of the element being rendered as a verified file:

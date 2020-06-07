@@ -40,6 +40,9 @@ public class TheTests
 
     static TheTests()
     {
+        #region Enable
+        VerifyWinForms.Enable();
+        #endregion
         SharedVerifySettings.UniqueForRuntime();
         VerifyPhash.RegisterComparer("png", .99f);
     }
