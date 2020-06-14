@@ -2,7 +2,7 @@
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-public class WinFormsUtils
+class WinFormsUtils
 {
     public static string ScreenCapture(string received, Control controlUnderTest)
     {

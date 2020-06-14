@@ -3,15 +3,15 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Verify
+namespace VerifyTests
 {
     public static class VerifyWinForms
     {
         public static void Enable()
         {
-            SharedVerifySettings.RegisterFileConverter<Form>("png", FormToImage);
-            SharedVerifySettings.RegisterFileConverter<Control>("png", ControlToImage);
-            SharedVerifySettings.RegisterFileConverter<UserControl>("png", ControlToImage);
+            VerifierSettings.RegisterFileConverter<Form>("png", FormToImage);
+            VerifierSettings.RegisterFileConverter<Control>("png", ControlToImage);
+            VerifierSettings.RegisterFileConverter<UserControl>("png", ControlToImage);
         }
 
         static ConversionResult FormToImage(Form form, VerifySettings settings)

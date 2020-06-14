@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
-using Verify;
+using VerifyTests;
 using VerifyNUnit;
 using NUnit.Framework;
 
@@ -43,7 +43,7 @@ public class TheTests
         #region Enable
         VerifyWinForms.Enable();
         #endregion
-        SharedVerifySettings.UniqueForRuntime();
+        VerifierSettings.UniqueForRuntime();
         VerifyPhash.RegisterComparer("png", .99f);
     }
 }
