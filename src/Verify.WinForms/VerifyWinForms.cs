@@ -9,14 +9,14 @@ namespace VerifyTests
     {
         public static void Enable()
         {
-            VerifierSettings.RegisterFileConverter<Form>("png", FormToImage);
-            VerifierSettings.RegisterFileConverter<Control>("png", ControlToImage);
-            VerifierSettings.RegisterFileConverter<UserControl>("png", ControlToImage);
+            VerifierSettings.RegisterFileConverter<Form>(FormToImage);
+            VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
+            VerifierSettings.RegisterFileConverter<UserControl>( ControlToImage);
         }
 
         static ConversionResult FormToImage(Form form, VerifySettings settings)
         {
-            return new ConversionResult(null, FormToStream(form));
+            return new ConversionResult(null, "png", FormToStream(form));
         }
 
         static ConversionResult ControlToImage(Control control, VerifySettings settings)
@@ -29,7 +29,7 @@ namespace VerifyTests
             form.Controls.Add(control);
             form.ShowInTaskbar = false;
             form.Show();
-            return new ConversionResult(null, ControlToImage(control));
+            return new ConversionResult(null, "png", ControlToImage(control));
         }
 
         static Stream FormToStream(Form form)
