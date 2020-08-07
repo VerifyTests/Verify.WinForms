@@ -35,7 +35,7 @@ https://nuget.org/packages/Verify.WinForms/
 Enable VerifyXaml once at assembly load time:
 
 <!-- snippet: Enable -->
-<a id='snippet-enable'/></a>
+<a id='snippet-enable'></a>
 ```cs
 VerifyWinForms.Enable();
 ```
@@ -45,7 +45,7 @@ VerifyWinForms.Enable();
 A visual element (Form/Control etc) can then be verified as follows:
 
 <!-- snippet: FormUsage -->
-<a id='snippet-formusage'/></a>
+<a id='snippet-formusage'></a>
 ```cs
 [Test]
 public Task FormUsage()
