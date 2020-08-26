@@ -10,8 +10,23 @@ namespace VerifyTests
         public static void Enable()
         {
             VerifierSettings.RegisterFileConverter<Form>(FormToImage);
+            VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
             VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
-            VerifierSettings.RegisterFileConverter<UserControl>( ControlToImage);
+            VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
+        }
+
+        static ConversionResult MenuToImage(ContextMenuStrip control, VerifySettings settings)
+        {
+            using var form = new Form
+            {
+                Width = control.Width,
+                Height = control.Height,
+                ContextMenuStrip = control,
+                ShowInTaskbar = false
+            };
+            form.Show();
+            control.Show();
+            return new ConversionResult(null, "png", ControlToImage(control));
         }
 
         static ConversionResult FormToImage(Form form, VerifySettings settings)

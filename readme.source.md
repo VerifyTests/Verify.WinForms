@@ -24,7 +24,10 @@ Enable VerifyXaml once at assembly load time:
 
 snippet: Enable
 
-A visual element (Form/Control etc) can then be verified as follows:
+
+### Form
+
+A visual element (Form/Control etc) can be verified as follows:
 
 snippet: FormUsage
 
@@ -33,6 +36,19 @@ With the state of the element being rendered as a verified file:
 [TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.FormUsage.Net.verified.png):
 
 <img src="/src/Tests/TheTests.FormUsage.Net.verified.png" width="200px">
+
+
+### ContextMenuStrip
+
+A `ContextMenuStrip` can be verified as follows:
+
+snippet: ContextMenuStrip
+
+With the state of the element being rendered as a verified file:
+
+[TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.ContextMenuStrip.Net.verified.png):
+
+<img src="/src/Tests/TheTests.ContextMenuStrip.Net.verified.png" width="200px">
 
 
 ## OS specific rendering

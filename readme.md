@@ -21,6 +21,8 @@ Part of the <a href='https://dotnetfoundation.org' alt=''>.NET Foundation</a>
 ## Contents
 
   * [Usage](#usage)
+    * [Form](#form)
+    * [ContextMenuStrip](#contextmenustrip)
   * [OS specific rendering](#os-specific-rendering)
   * [Security contact information](#security-contact-information)<!-- endToc -->
 
@@ -39,10 +41,13 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L43-L45' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L64-L68' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
 <!-- endSnippet -->
 
-A visual element (Form/Control etc) can then be verified as follows:
+
+### Form
+
+A visual element (Form/Control etc) can be verified as follows:
 
 <!-- snippet: FormUsage -->
 <a id='snippet-formusage'></a>
@@ -53,7 +58,7 @@ public Task FormUsage()
     return Verifier.Verify(new MyForm());
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L12-L18' title='File snippet `formusage` was extracted from'>snippet source</a> | <a href='#snippet-formusage' title='Navigate to start of snippet `formusage`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L12-L20' title='File snippet `formusage` was extracted from'>snippet source</a> | <a href='#snippet-formusage' title='Navigate to start of snippet `formusage`'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -61,6 +66,34 @@ With the state of the element being rendered as a verified file:
 [TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.FormUsage.Net.verified.png):
 
 <img src="/src/Tests/TheTests.FormUsage.Net.verified.png" width="200px">
+
+
+### ContextMenuStrip
+
+A `ContextMenuStrip` can be verified as follows:
+
+<!-- snippet: ContextMenuStrip -->
+<a id='snippet-contextmenustrip'></a>
+```cs
+[Test]
+public Task ContextMenuStrip()
+{
+    var menu = new ContextMenuStrip();
+    var items = menu.Items;
+
+    items.Add(new ToolStripMenuItem("About"));
+    items.Add(new ToolStripMenuItem("Exit"));
+    return Verifier.Verify(menu);
+}
+```
+<sup><a href='/src/Tests/TheTests.cs#L32-L45' title='File snippet `contextmenustrip` was extracted from'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Navigate to start of snippet `contextmenustrip`'>anchor</a></sup>
+<!-- endSnippet -->
+
+With the state of the element being rendered as a verified file:
+
+[TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.ContextMenuStrip.Net.verified.png):
+
+<img src="/src/Tests/TheTests.ContextMenuStrip.Net.verified.png" width="200px">
 
 
 ## OS specific rendering
