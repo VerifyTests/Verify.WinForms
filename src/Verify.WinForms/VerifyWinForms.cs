@@ -9,10 +9,10 @@ namespace VerifyTests
     {
         public static void Enable()
         {
-            VerifierSettings.RegisterFileConverter<Form>(FormToImage);
-            VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
             VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
             VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
+            VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
+            VerifierSettings.RegisterFileConverter<Form>(FormToImage);
         }
 
         static ConversionResult MenuToImage(ContextMenuStrip control, VerifySettings settings)
