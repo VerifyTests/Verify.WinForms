@@ -41,7 +41,7 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L67-L71' title='File snippet `enable` was extracted from'>snippet source</a> | <a href='#snippet-enable' title='Navigate to start of snippet `enable`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L67-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -58,7 +58,7 @@ public Task FormUsage()
     return Verifier.Verify(new MyForm());
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L12-L20' title='File snippet `formusage` was extracted from'>snippet source</a> | <a href='#snippet-formusage' title='Navigate to start of snippet `formusage`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L12-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -89,7 +89,7 @@ public Task ContextMenuStrip()
     return Verifier.Verify(menu, settings);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L32-L48' title='File snippet `contextmenustrip` was extracted from'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Navigate to start of snippet `contextmenustrip`'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L32-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
