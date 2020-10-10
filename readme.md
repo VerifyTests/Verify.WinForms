@@ -37,11 +37,11 @@ https://nuget.org/packages/Verify.WinForms/
 Enable VerifyXaml once at assembly load time:
 
 <!-- snippet: Enable -->
-<a id='enable'></a>
+<a id='snippet-enable'></a>
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L67-L71' title='Snippet source file'>snippet source</a> | <a href='#enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L67-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -50,7 +50,7 @@ VerifyWinForms.Enable();
 A visual element (Form/Control etc) can be verified as follows:
 
 <!-- snippet: FormUsage -->
-<a id='formusage'></a>
+<a id='snippet-formusage'></a>
 ```cs
 [Test]
 public Task FormUsage()
@@ -58,7 +58,7 @@ public Task FormUsage()
     return Verifier.Verify(new MyForm());
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L12-L20' title='Snippet source file'>snippet source</a> | <a href='#formusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L12-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -73,7 +73,7 @@ With the state of the element being rendered as a verified file:
 A `ContextMenuStrip` can be verified as follows:
 
 <!-- snippet: ContextMenuStrip -->
-<a id='contextmenustrip'></a>
+<a id='snippet-contextmenustrip'></a>
 ```cs
 [Test]
 public Task ContextMenuStrip()
@@ -89,7 +89,7 @@ public Task ContextMenuStrip()
     return Verifier.Verify(menu, settings);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L32-L48' title='Snippet source file'>snippet source</a> | <a href='#contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L32-L48' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
