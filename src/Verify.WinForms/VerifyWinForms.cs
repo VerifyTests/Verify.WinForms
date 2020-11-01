@@ -10,10 +10,10 @@ namespace VerifyTests
     {
         public static void Enable()
         {
-            VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
-            VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
-            VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
             VerifierSettings.RegisterFileConverter<Form>(FormToImage);
+            VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
+            VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
+            VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
         }
 
         static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context)
