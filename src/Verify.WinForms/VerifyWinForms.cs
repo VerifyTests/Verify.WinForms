@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
@@ -16,7 +15,7 @@ namespace VerifyTests
             VerifierSettings.RegisterFileConverter<Form>(FormToImage);
         }
 
-        static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context)
+        static ConversionResult MenuToImage(ContextMenuStrip control, VerifySettings settings)
         {
             using var form = new Form
             {
@@ -30,12 +29,12 @@ namespace VerifyTests
             return new ConversionResult(null, "png", ControlToImage(control));
         }
 
-        static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context)
+        static ConversionResult FormToImage(Form form, VerifySettings settings)
         {
             return new ConversionResult(null, "png", FormToStream(form));
         }
 
-        static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context)
+        static ConversionResult ControlToImage(Control control, VerifySettings settings)
         {
             using var form = new Form
             {
