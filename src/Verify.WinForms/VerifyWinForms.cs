@@ -18,7 +18,7 @@ namespace VerifyTests
 
         static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context)
         {
-            using var form = new Form
+            using Form form = new()
             {
                 Width = control.Width,
                 Height = control.Height,
@@ -27,17 +27,17 @@ namespace VerifyTests
             };
             form.Show();
             control.Show();
-            return new ConversionResult(null, "png", ControlToImage(control));
+            return new(null, "png", ControlToImage(control));
         }
 
         static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context)
         {
-            return new ConversionResult(null, "png", FormToStream(form));
+            return new(null, "png", FormToStream(form));
         }
 
         static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context)
         {
-            using var form = new Form
+            using Form form = new()
             {
                 Width = control.Width,
                 Height = control.Height
@@ -45,7 +45,7 @@ namespace VerifyTests
             form.Controls.Add(control);
             form.ShowInTaskbar = false;
             form.Show();
-            return new ConversionResult(null, "png", ControlToImage(control));
+            return new(null, "png", ControlToImage(control));
         }
 
         static Stream FormToStream(Form form)
@@ -57,9 +57,9 @@ namespace VerifyTests
 
         static Stream ControlToImage(Control control)
         {
-            using var bitmap = new Bitmap(control.Width, control.Height, PixelFormat.Format32bppArgb);
-            control.DrawToBitmap(bitmap, new Rectangle(0, 0, control.Width, control.Height));
-            var stream = new MemoryStream();
+            using Bitmap bitmap = new(control.Width, control.Height, PixelFormat.Format32bppArgb);
+            control.DrawToBitmap(bitmap, new(0, 0, control.Width, control.Height));
+            MemoryStream stream = new();
             bitmap.Save(stream, ImageFormat.Png);
             return stream;
         }

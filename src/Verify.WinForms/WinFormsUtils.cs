@@ -6,18 +6,16 @@ class WinFormsUtils
 {
     public static string ScreenCapture(string received, Control controlUnderTest)
     {
-        using (var hidden = new Form())
-        {
-            EnsureControlDisplaysCorrectlyByAddingItToAHiddenForm(hidden, controlUnderTest);
-            SavePng(received, controlUnderTest);
-        }
+        using var hidden = new Form();
+        EnsureControlDisplaysCorrectlyByAddingItToAHiddenForm(hidden, controlUnderTest);
+        SavePng(received, controlUnderTest);
         return received;
     }
 
     public static void SavePng(string received, Control control)
     {
-        using var bitmap = new Bitmap(control.Width, control.Height, PixelFormat.Format32bppArgb);
-        control.DrawToBitmap(bitmap, new Rectangle(0, 0, control.Width, control.Height));
+        using Bitmap bitmap = new(control.Width, control.Height, PixelFormat.Format32bppArgb);
+        control.DrawToBitmap(bitmap, new(0, 0, control.Width, control.Height));
         bitmap.Save(received, ImageFormat.Png);
     }
 
