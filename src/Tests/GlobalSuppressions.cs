@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0003:Remove qualification", Scope = "moddule")]
+[assembly: SuppressMessage("Style", "IDE0003:Remove qualification", Scope = "module")]
