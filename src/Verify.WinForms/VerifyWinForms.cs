@@ -23,9 +23,10 @@ namespace VerifyTests
                 Width = control.Width,
                 Height = control.Height,
                 ContextMenuStrip = control,
-                ShowInTaskbar = false
+                ShowInTaskbar = false,
+                TopLevel = false
             };
-            form.Show();
+            control.TopLevel = false;
             control.Show();
             return new(null, "png", ControlToImage(control));
         }
@@ -40,10 +41,11 @@ namespace VerifyTests
             using Form form = new()
             {
                 Width = control.Width,
-                Height = control.Height
+                Height = control.Height,
+                ShowInTaskbar = false,
+                TopLevel = false
             };
             form.Controls.Add(control);
-            form.ShowInTaskbar = false;
             form.Show();
             return new(null, "png", ControlToImage(control));
         }
@@ -51,6 +53,7 @@ namespace VerifyTests
         static Stream FormToStream(Form form)
         {
             form.ShowInTaskbar = false;
+            form.TopLevel = false;
             form.Show();
             return ControlToImage(form);
         }
