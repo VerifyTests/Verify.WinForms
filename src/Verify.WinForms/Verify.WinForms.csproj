@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>

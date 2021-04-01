@@ -1,4 +1,7 @@
-﻿using System;
+﻿// ReSharper disable RedundantUsingDirective
+// ReSharper disable RedundantNameQualifier
+// ReSharper disable ArrangeThisQualifier
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
