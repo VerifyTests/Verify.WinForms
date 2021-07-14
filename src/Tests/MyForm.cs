@@ -41,7 +41,6 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.button1);
             this.Name = "MyForm";
             this.ResumeLayout(false);
-
         }
     }
 }
