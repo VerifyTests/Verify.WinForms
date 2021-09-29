@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
 using VerifyTests;

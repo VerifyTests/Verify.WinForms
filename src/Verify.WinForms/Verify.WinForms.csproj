@@ -2,12 +2,11 @@
   <PropertyGroup>
     <TargetFrameworks>net48;netcoreapp3.1;net5-Windows;net6-Windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
-    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Verify" Version="12.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" Condition="$(Configuration) == 'Release'" />
-    <PackageReference Include="ProjectDefaults" Version="1.0.58" PrivateAssets="All" />
+    <PackageReference Include="ProjectDefaults" Version="1.0.59" PrivateAssets="All" />
   </ItemGroup>
 </Project>
