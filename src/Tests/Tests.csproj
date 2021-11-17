@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
   <PropertyGroup>
     <TargetFrameworks>net48;net5-windows;net6-Windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
