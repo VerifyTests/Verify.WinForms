@@ -23,7 +23,7 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L66-L70' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L61-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -40,7 +40,7 @@ public Task FormUsage()
     return Verifier.Verify(new MyForm());
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L11-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L6-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -71,7 +71,7 @@ public Task ContextMenuStrip()
     return Verifier.Verify(menu, settings);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L31-L47' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L26-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:

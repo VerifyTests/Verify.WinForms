@@ -1,9 +1,4 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using WindowsFormsApp1;
-using VerifyTests;
-using VerifyNUnit;
-using NUnit.Framework;
+﻿using WindowsFormsApp1;
 
 [TestFixture]
 public class TheTests
