@@ -8,7 +8,7 @@ public class TheTests
     [Test]
     public Task FormUsage()
     {
-        return Verifier.Verify(new MyForm());
+        return Verify(new MyForm());
     }
 
     #endregion
@@ -18,7 +18,7 @@ public class TheTests
     [Test]
     public Task UserControlUsage()
     {
-        return Verifier.Verify(new MyUserControl());
+        return Verify(new MyUserControl());
     }
 
     #endregion
@@ -36,7 +36,7 @@ public class TheTests
         //AutoVerify CI renders differently
         var settings = new VerifySettings();
         settings.AutoVerify();
-        return Verifier.Verify(menu, settings);
+        return Verify(menu, settings);
     }
 
     #endregion
@@ -46,7 +46,7 @@ public class TheTests
     [Test]
     public Task ControlUsage()
     {
-        return Verifier.Verify(
+        return Verify(
             new Button
             {
                 BackColor = Color.LightBlue,
