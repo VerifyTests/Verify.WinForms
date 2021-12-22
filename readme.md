@@ -37,7 +37,7 @@ A visual element (Form/Control etc) can be verified as follows:
 [Test]
 public Task FormUsage()
 {
-    return Verifier.Verify(new MyForm());
+    return Verify(new MyForm());
 }
 ```
 <sup><a href='/src/Tests/TheTests.cs#L6-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
@@ -68,7 +68,7 @@ public Task ContextMenuStrip()
     //AutoVerify CI renders differently
     var settings = new VerifySettings();
     settings.AutoVerify();
-    return Verifier.Verify(menu, settings);
+    return Verify(menu, settings);
 }
 ```
 <sup><a href='/src/Tests/TheTests.cs#L26-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
