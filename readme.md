@@ -21,7 +21,7 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L61-L65' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L55-L59' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -33,12 +33,10 @@ A visual element (Form/Control etc) can be verified as follows:
 <a id='snippet-formusage'></a>
 ```cs
 [Test]
-public Task FormUsage()
-{
-    return Verify(new MyForm());
-}
+public Task FormUsage() =>
+    Verify(new MyForm());
 ```
-<sup><a href='/src/Tests/TheTests.cs#L6-L14' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L6-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -69,7 +67,7 @@ public Task ContextMenuStrip()
     return Verify(menu, settings);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L26-L42' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L22-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:

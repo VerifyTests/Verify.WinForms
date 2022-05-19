@@ -27,10 +27,8 @@ public static class VerifyWinForms
         return new(null, "png", ControlToImage(control));
     }
 
-    static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context)
-    {
-        return new(null, "png", FormToStream(form));
-    }
+    static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context) =>
+        new(null, "png", FormToStream(form));
 
     static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context)
     {

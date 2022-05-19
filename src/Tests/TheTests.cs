@@ -6,20 +6,16 @@ public class TheTests
     #region FormUsage
 
     [Test]
-    public Task FormUsage()
-    {
-        return Verify(new MyForm());
-    }
+    public Task FormUsage() =>
+        Verify(new MyForm());
 
     #endregion
 
     #region UserControlUsage
 
     [Test]
-    public Task UserControlUsage()
-    {
-        return Verify(new MyUserControl());
-    }
+    public Task UserControlUsage() =>
+        Verify(new MyUserControl());
 
     #endregion
 
@@ -44,15 +40,13 @@ public class TheTests
     #region ControlUsage
 
     [Test]
-    public Task ControlUsage()
-    {
-        return Verify(
+    public Task ControlUsage() =>
+        Verify(
             new Button
             {
                 BackColor = Color.LightBlue,
                 Text = "Help"
             });
-    }
 
     #endregion
 
