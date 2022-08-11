@@ -20,7 +20,8 @@ public static class VerifyWinForms
             Height = control.Height,
             ContextMenuStrip = control,
             ShowInTaskbar = false,
-            TopLevel = false
+            TopLevel = false,
+            AutoScaleMode = AutoScaleMode.None
         };
         control.TopLevel = false;
         control.Show();
@@ -37,7 +38,8 @@ public static class VerifyWinForms
             Width = control.Width,
             Height = control.Height,
             ShowInTaskbar = false,
-            TopLevel = false
+            TopLevel = false,
+            AutoScaleMode = AutoScaleMode.None
         };
         form.Controls.Add(control);
         form.Show();
@@ -48,6 +50,7 @@ public static class VerifyWinForms
     {
         form.ShowInTaskbar = false;
         form.TopLevel = false;
+        form.AutoScaleMode = AutoScaleMode.None;
         form.Show();
         return ControlToImage(form);
     }
