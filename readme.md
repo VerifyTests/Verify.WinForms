@@ -21,7 +21,7 @@ Enable VerifyXaml once at assembly load time:
 ```cs
 VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L55-L59' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L54-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -62,12 +62,11 @@ public Task ContextMenuStrip()
     items.Add(new ToolStripMenuItem("About"));
     items.Add(new ToolStripMenuItem("Exit"));
     //AutoVerify CI renders differently
-    var settings = new VerifySettings();
-    settings.AutoVerify();
-    return Verify(menu, settings);
+    return Verify(menu)
+            .AutoVerify();
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L22-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L22-L37' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
