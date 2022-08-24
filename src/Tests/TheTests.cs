@@ -30,9 +30,8 @@ public class TheTests
         items.Add(new ToolStripMenuItem("About"));
         items.Add(new ToolStripMenuItem("Exit"));
         //AutoVerify CI renders differently
-        var settings = new VerifySettings();
-        settings.AutoVerify();
-        return Verify(menu, settings);
+        return Verify(menu)
+                .AutoVerify();
     }
 
     #endregion
