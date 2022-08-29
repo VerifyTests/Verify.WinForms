@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
   <PropertyGroup>
-    <TargetFrameworks>net48;net5-windows;net6-Windows</TargetFrameworks>
+    <TargetFramework>net6-Windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Argon" Version="0.1.0-beta.18" />
     <PackageReference Include="MarkdownSnippets.MsBuild" Version="24.5.0" PrivateAssets="all" />
+    <PackageReference Include="Verify.DiffPlex" Version="2.0.0-beta.2" />
     <PackageReference Include="Verify.Phash" Version="3.0.0-beta.2" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.3.0-dev-02168" />
