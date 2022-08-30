@@ -14,14 +14,15 @@ https://nuget.org/packages/Verify.WinForms/
 
 ## Usage
 
-Enable VerifyXaml once at assembly load time:
-
 <!-- snippet: Enable -->
 <a id='snippet-enable'></a>
 ```cs
-VerifyWinForms.Enable();
+[ModuleInitializer]
+public static void Init()
+{
+    VerifyWinForms.Enable();
 ```
-<sup><a href='/src/Tests/TheTests.cs#L54-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/ModuleInit.cs#L3-L10' title='Snippet source file'>snippet source</a> | <a href='#snippet-enable' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

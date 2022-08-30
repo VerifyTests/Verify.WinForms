@@ -48,16 +48,4 @@ public class TheTests
             });
 
     #endregion
-
-    static TheTests()
-    {
-        #region Enable
-
-        VerifyWinForms.Enable();
-
-        #endregion
-
-        VerifierSettings.UniqueForRuntime();
-        VerifyPhash.RegisterComparer("png", .99f);
-    }
 }
