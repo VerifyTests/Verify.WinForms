@@ -6,6 +6,7 @@ public static class VerifyWinForms
 {
     public static void Enable()
     {
+        InnerVerifier.ThrowIfVerifyHasBeenRun();
         VerifierSettings.RegisterFileConverter<Form>(FormToImage);
         VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
         VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
