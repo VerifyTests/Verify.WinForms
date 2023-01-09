@@ -3,12 +3,14 @@
     #region enable
 
     [ModuleInitializer]
-    public static void Init()
-    {
+    public static void Init() =>
         VerifyWinForms.Enable();
 
-        #endregion
+    #endregion
 
+    [ModuleInitializer]
+    public static void InitOther()
+    {
         VerifierSettings.UniqueForRuntime();
         VerifyPhash.RegisterComparer("png", .99f);
 
