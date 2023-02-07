@@ -4,7 +4,7 @@ namespace VerifyTests;
 
 public static class VerifyWinForms
 {
-    public static bool Initialized {get; private set; }
+    public static bool Initialized { get; private set; }
 
     [Obsolete("Use Initialize()")]
     public static void Enable() =>
