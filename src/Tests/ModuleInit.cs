@@ -4,7 +4,7 @@
 
     [ModuleInitializer]
     public static void Init() =>
-        VerifyWinForms.Enable();
+        VerifyWinForms.Initialize();
 
     #endregion
 
