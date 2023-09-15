@@ -8,6 +8,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+// ReSharper disable PartialTypeWithSinglePart
+// ReSharper disable ArrangeConstructorOrDestructorBody
+// ReSharper disable ArrangeObjectCreationWhenTypeNotEvident
 #pragma warning disable 8618
 
 namespace WindowsFormsApp1;
