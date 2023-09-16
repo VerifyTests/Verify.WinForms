@@ -8,6 +8,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+// ReSharper disable ArrangeObjectCreationWhenTypeNotEvident
+// ReSharper disable PartialTypeWithSinglePart
 #pragma warning disable 8618
 
 namespace WindowsFormsApp1;
@@ -16,10 +18,8 @@ public partial class MyForm : Form
 {
     private Button button1;
 
-    public MyForm()
-    {
+    public MyForm() =>
         InitializeComponent();
-    }
 
     private void InitializeComponent()
     {

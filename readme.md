@@ -62,12 +62,10 @@ public Task ContextMenuStrip()
 
     items.Add(new ToolStripMenuItem("About"));
     items.Add(new ToolStripMenuItem("Exit"));
-    //AutoVerify CI renders differently
-    return Verify(menu)
-            .AutoVerify();
+    return Verify(menu);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L22-L37' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:

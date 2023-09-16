@@ -29,9 +29,7 @@ public class TheTests
 
         items.Add(new ToolStripMenuItem("About"));
         items.Add(new ToolStripMenuItem("Exit"));
-        //AutoVerify CI renders differently
-        return Verify(menu)
-                .AutoVerify();
+        return Verify(menu);
     }
 
     #endregion
