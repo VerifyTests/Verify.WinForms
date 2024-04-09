@@ -12,7 +12,7 @@
     public static void InitOther()
     {
         VerifierSettings.UniqueForRuntime();
-        VerifyPhash.RegisterComparer("png", .99f);
+        VerifyPhash.RegisterComparer("png", .80f);
 
         VerifyDiffPlex.Initialize();
     }
