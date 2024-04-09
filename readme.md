@@ -15,7 +15,7 @@ https://nuget.org/packages/Verify.WinForms/
 
 ## Usage
 
-<!-- snippet: Enable -->
+<!-- snippet: enable -->
 <a id='snippet-enable'></a>
 ```cs
 [ModuleInitializer]
@@ -31,13 +31,13 @@ public static void Init() =>
 A visual element (Form/Control etc) can be verified as follows:
 
 <!-- snippet: FormUsage -->
-<a id='snippet-formusage'></a>
+<a id='snippet-FormUsage'></a>
 ```cs
 [Test]
 public Task FormUsage() =>
     Verify(new MyForm());
 ```
-<sup><a href='/src/Tests/TheTests.cs#L6-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-formusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L6-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-FormUsage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -52,7 +52,7 @@ With the state of the element being rendered as a verified file:
 A `ContextMenuStrip` can be verified as follows:
 
 <!-- snippet: ContextMenuStrip -->
-<a id='snippet-contextmenustrip'></a>
+<a id='snippet-ContextMenuStrip'></a>
 ```cs
 [Test]
 public Task ContextMenuStrip()
@@ -65,7 +65,7 @@ public Task ContextMenuStrip()
     return Verify(menu);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-contextmenustrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
