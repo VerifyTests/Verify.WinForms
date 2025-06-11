@@ -8,9 +8,10 @@ Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of
 
 **See [Milestones](../../milestones?state=closed) for release notes.**
 
-## NuGet package
 
-https://nuget.org/packages/Verify.WinForms/
+## NuGet
+
+ * https://nuget.org/packages/Verify.WinForms
 
 
 ## Usage
