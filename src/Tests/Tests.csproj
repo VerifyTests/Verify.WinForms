@@ -7,7 +7,6 @@
   <ItemGroup>
     <PackageReference Include="MarkdownSnippets.MsBuild" PrivateAssets="all" />
     <PackageReference Include="Verify.DiffPlex" />
-    <PackageReference Include="Verify.Phash" />
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter" />
     <PackageReference Include="Verify.NUnit" />
