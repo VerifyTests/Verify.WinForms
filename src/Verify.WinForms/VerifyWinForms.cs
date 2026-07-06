@@ -1,4 +1,4 @@
-﻿using System.Drawing.Imaging;
+using System.Drawing.Imaging;
 
 namespace VerifyTests;
 
@@ -21,39 +21,41 @@ public static class VerifyWinForms
         VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
     }
 
-    static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context)
-    {
-        using var form = new Form
+    static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context) =>
+        Convert(() =>
         {
-            Width = control.Width,
-            Height = control.Height,
-            ContextMenuStrip = control,
-            ShowInTaskbar = false,
-            TopLevel = false,
-            AutoScaleMode = AutoScaleMode.None
-        };
-        control.TopLevel = false;
-        control.Show();
-        return new(null, "png", ControlToImage(control));
-    }
+            using var form = new Form
+            {
+                Width = control.Width,
+                Height = control.Height,
+                ContextMenuStrip = control,
+                ShowInTaskbar = false,
+                TopLevel = false,
+                AutoScaleMode = AutoScaleMode.None
+            };
+            control.TopLevel = false;
+            control.Show();
+            return ControlToStream(control);
+        });
 
     static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context) =>
-        new(null, "png", FormToStream(form));
+        Convert(() => FormToStream(form));
 
-    static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context)
-    {
-        using var form = new Form
+    static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context) =>
+        Convert(() =>
         {
-            Width = control.Width,
-            Height = control.Height,
-            ShowInTaskbar = false,
-            TopLevel = false,
-            AutoScaleMode = AutoScaleMode.None
-        };
-        form.Controls.Add(control);
-        form.Show();
-        return new(null, "png", ControlToImage(control));
-    }
+            using var form = new Form
+            {
+                Width = control.Width,
+                Height = control.Height,
+                ShowInTaskbar = false,
+                TopLevel = false,
+                AutoScaleMode = AutoScaleMode.None
+            };
+            form.Controls.Add(control);
+            form.Show();
+            return ControlToStream(control);
+        });
 
     static Stream FormToStream(Form form)
     {
@@ -61,15 +63,34 @@ public static class VerifyWinForms
         form.TopLevel = false;
         form.AutoScaleMode = AutoScaleMode.None;
         form.Show();
-        return ControlToImage(form);
+        return ControlToStream(form);
     }
 
-    static Stream ControlToImage(Control control)
+    static Stream ControlToStream(Control control)
     {
         using var bitmap = new Bitmap(control.Width, control.Height, PixelFormat.Format32bppArgb);
         control.DrawToBitmap(bitmap, new(0, 0, control.Width, control.Height));
         var stream = new MemoryStream();
         bitmap.Save(stream, ImageFormat.Png);
         return stream;
+    }
+
+    // Showing a WinForms control installs a WindowsFormsSynchronizationContext as
+    // SynchronizationContext.Current on the current thread. Verify runs its pipeline free of any
+    // SynchronizationContext (it does async IO without ConfigureAwait(false); see
+    // SettingsTask.ToTask), so restore the previous context after rendering. Otherwise the leaked
+    // context would be captured by Verify's downstream async IO and its continuation posted to a
+    // message pump that is never run - deadlocking whenever a snapshot is new or mismatched.
+    static ConversionResult Convert(Func<Stream> render)
+    {
+        var syncContext = SynchronizationContext.Current;
+        try
+        {
+            return new(null, "png", render());
+        }
+        finally
+        {
+            SynchronizationContext.SetSynchronizationContext(syncContext);
+        }
     }
 }
