@@ -19,10 +19,8 @@ public partial class MyUserControl : UserControl
 {
     private Button button1;
 
-    public MyUserControl()
-    {
+    public MyUserControl() =>
         InitializeComponent();
-    }
 
     private void InitializeComponent()
     {
