@@ -1,7 +1,7 @@
 # <img src="/src/icon.png" height="30px"> Verify.WinForms
 
 [![Discussions](https://img.shields.io/badge/Verify-Discussions-yellow?svg=true&label=)](https://github.com/orgs/VerifyTests/discussions)
-[![Build status](https://img.shields.io/appveyor/build/SimonCropp/verify-winforms)](https://ci.appveyor.com/project/SimonCropp/verify-winforms)
+[![Build status](https://github.com/VerifyTests/Verify.WinForms/actions/workflows/build.yml/badge.svg)](https://github.com/VerifyTests/Verify.WinForms/actions/workflows/build.yml)
 [![NuGet Status](https://img.shields.io/nuget/v/Verify.WinForms.svg)](https://www.nuget.org/packages/Verify.WinForms/)
 
 Extends [Verify](https://github.com/VerifyTests/Verify) to allow verification of WinForms UIs.<!-- singleLineInclude: intro. path: /docs/intro.include.md -->
