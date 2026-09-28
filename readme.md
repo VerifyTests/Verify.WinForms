@@ -52,7 +52,7 @@ A visual element (Form/Control etc) can be verified as follows:
 public Task FormUsage() =>
     Verify(new MyForm());
 ```
-<sup><a href='/src/Tests/TheTests.cs#L6-L12' title='Snippet source file'>snippet source</a> | <a href='#snippet-FormUsage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L5-L11' title='Snippet source file'>snippet source</a> | <a href='#snippet-FormUsage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -80,7 +80,7 @@ public Task ContextMenuStrip()
     return Verify(menu);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L22-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L21-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:

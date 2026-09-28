@@ -1,6 +1,5 @@
 ﻿using WindowsFormsApp1;
 
-[TestFixture]
 public class TheTests
 {
     #region FormUsage
