@@ -63,7 +63,12 @@ With the state of the element being rendered as a verified file:
 <img src="/src/Tests/TheTests.FormUsage.Net.verified.png" width="200px">
 
 
-### ContextMenuStrip
+### Menus and drop-downs
+
+Any `ToolStripDropDown` can be verified: a `ContextMenuStrip`, the `DropDown` of a `ToolStripMenuItem` or `ToolStripDropDownButton`, or a plain `ToolStripDropDown`. It is shown as the popup window it is, but off screen, so it is laid out and drawn (renderer, margins, border) as it appears on screen. It is closed again once rendered.
+
+
+#### ContextMenuStrip
 
 A `ContextMenuStrip` can be verified as follows:
 
@@ -86,9 +91,43 @@ public Task ContextMenuStrip()
 
 With the state of the element being rendered as a verified file:
 
-[TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.ContextMenuStrip.Net.verified.png):
+[TheTests.ContextMenuStrip.DotNet.verified.png](/src/Tests/TheTests.ContextMenuStrip.DotNet.verified.png):
 
-<img src="/src/Tests/TheTests.ContextMenuStrip.Net.verified.png" width="200px">
+<img src="/src/Tests/TheTests.ContextMenuStrip.DotNet.verified.png" width="200px">
+
+
+#### ToolStripDropDownMenu
+
+The menu of a `ToolStripDropDownButton` (or of a `ToolStripMenuItem`) can be verified via its `DropDown`:
+
+<!-- snippet: ToolStripDropDownMenu -->
+<a id='snippet-ToolStripDropDownMenu'></a>
+```cs
+[Test]
+public Task ToolStripDropDownMenu()
+{
+    var button = new ToolStripDropDownButton("File");
+    var items = button.DropDownItems;
+
+    items.Add(new ToolStripMenuItem("New"));
+    items.Add(
+        new ToolStripMenuItem("Word Wrap")
+        {
+            Checked = true
+        });
+    items.Add(new ToolStripSeparator());
+    items.Add(new ToolStripMenuItem("Exit"));
+    return Verify(button.DropDown);
+}
+```
+<sup><a href='/src/Tests/TheTests.cs#L36-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-ToolStripDropDownMenu' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+With the state of the element being rendered as a verified file:
+
+[TheTests.ToolStripDropDownMenu.DotNet.verified.png](/src/Tests/TheTests.ToolStripDropDownMenu.DotNet.verified.png):
+
+<img src="/src/Tests/TheTests.ToolStripDropDownMenu.DotNet.verified.png" width="200px">
 
 
 ## OS specific rendering
