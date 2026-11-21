@@ -13,28 +13,66 @@ public static class VerifyWinForms
 
         Initialized = true;
         InnerVerifier.ThrowIfVerifyHasBeenRun();
+        // Verify uses the first registered converter that matches, so the more specific types
+        // must be registered before Control.
         VerifierSettings.RegisterFileConverter<Form>(FormToImage);
-        VerifierSettings.RegisterFileConverter<ContextMenuStrip>(MenuToImage);
+        VerifierSettings.RegisterFileConverter<ToolStripDropDown>(DropDownToImage);
         VerifierSettings.RegisterFileConverter<UserControl>(ControlToImage);
         VerifierSettings.RegisterFileConverter<Control>(ControlToImage);
     }
 
-    static ConversionResult MenuToImage(ContextMenuStrip control, IReadOnlyDictionary<string, object> context) =>
+    static readonly Point offScreen = new(-20000, -20000);
+
+    // A drop-down (ContextMenuStrip, a menu item's or drop-down button's DropDown, etc) is a popup
+    // window of its own. Show it as one, off screen, so it is laid out and drawn (renderer,
+    // margins, border) as it appears on screen, then close it again.
+    static ConversionResult DropDownToImage(ToolStripDropDown dropDown, IReadOnlyDictionary<string, object> context) =>
         Convert(() =>
         {
-            using var form = new Form
+            dropDown.Opening += MoveOffScreen;
+            try
             {
-                Width = control.Width,
-                Height = control.Height,
-                ContextMenuStrip = control,
-                ShowInTaskbar = false,
-                TopLevel = false,
-                AutoScaleMode = AutoScaleMode.None
-            };
-            control.TopLevel = false;
-            control.Show();
-            return ControlToStream(control);
+                // Showing at the off screen point, not just Show(), also stops WinForms moving the
+                // window back to the point it was last shown at once it is visible.
+                dropDown.Show(offScreen);
+            }
+            finally
+            {
+                dropDown.Opening -= MoveOffScreen;
+            }
+
+            try
+            {
+                Application.DoEvents();
+                return ControlToStream(dropDown);
+            }
+            finally
+            {
+                dropDown.Close();
+            }
         });
+
+    // WinForms keeps a top-level drop-down on screen whatever point it is shown at, and places a
+    // drop-down that belongs to an item by that item. So move the window itself off screen once
+    // WinForms has placed it but before it is made visible: it never appears on screen, and the
+    // mouse cannot be over it to highlight an item.
+    static void MoveOffScreen(object? sender, CancelEventArgs e)
+    {
+        if (e.Cancel)
+        {
+            return;
+        }
+
+        var dropDown = (ToolStripDropDown) sender!;
+        SetWindowPos(dropDown.Handle, IntPtr.Zero, offScreen.X, offScreen.Y, 0, 0, noSize | noZorder | noActive);
+    }
+
+    const uint noSize = 0x0001;
+    const uint noZorder = 0x0004;
+    const uint noActive = 0x0010;
+
+    [DllImport("user32.dll")]
+    static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint flags);
 
     static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context) =>
         Convert(() => FormToStream(form));
