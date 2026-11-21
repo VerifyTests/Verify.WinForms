@@ -11,7 +11,7 @@ public class TheTests
     #endregion
 
     // A form is shown top-level, off screen and without being activated, so its Shown handlers
-    // have run when it is drawn, and it is hidden again after.
+    // have run when it is drawn. It is disposed after, without being closed.
     [Test]
     public async Task FormIsShownOffScreenWithoutActivation()
     {
@@ -28,8 +28,10 @@ public class TheTests
         };
         form.Controls.Add(label);
         var activated = false;
+        var closed = false;
         var locations = new List<Point>();
         form.Activated += (_, _) => activated = true;
+        form.FormClosed += (_, _) => closed = true;
         form.Shown += (_, _) =>
         {
             label.Text = "Shown";
@@ -42,15 +44,17 @@ public class TheTests
         await Assert.That(activated).IsFalse();
         await Assert.That(locations).IsNotEmpty();
         await Assert.That(locations.Where(_ => _ != new Point(-20000, -20000))).IsEmpty();
-        await Assert.That(form.Visible).IsFalse();
         await Assert.That(form.TopLevel).IsTrue();
+        await Assert.That(form.IsDisposed).IsTrue();
+        await Assert.That(label.IsDisposed).IsTrue();
+        await Assert.That(closed).IsFalse();
     }
 
-    // A form the test has already shown is drawn where it is, and left shown.
+    // A form the test has already shown is drawn where it is, then disposed.
     [Test]
     public async Task AlreadyShownForm()
     {
-        using var form = new QuietForm
+        var form = new QuietForm
         {
             Width = 200,
             Height = 100,
@@ -63,8 +67,8 @@ public class TheTests
 
         await Verify(form);
 
-        await Assert.That(form.Visible).IsTrue();
         await Assert.That(form.TopLevel).IsTrue();
+        await Assert.That(form.IsDisposed).IsTrue();
     }
 
     class QuietForm : Form
@@ -134,7 +138,7 @@ public class TheTests
 
     // WinForms keeps a shown drop-down on screen, and places one that belongs to an item by that
     // item. It should still be off screen the whole time it is shown, so it never flashes on
-    // screen and the mouse cannot be over it.
+    // screen and the mouse cannot be over it. It is disposed after.
     [Test]
     public async Task DropDownIsShownOffScreen()
     {
@@ -149,6 +153,22 @@ public class TheTests
 
         await Assert.That(locations).IsNotEmpty();
         await Assert.That(locations.Where(_ => _ != new Point(-20000, -20000))).IsEmpty();
+        await Assert.That(dropDown.IsDisposed).IsTrue();
+    }
+
+    // Any other control is disposed once it has been rendered too.
+    [Test]
+    public async Task ControlIsDisposed()
+    {
+        var label = new Label
+        {
+            Text = "Disposed",
+            AutoSize = true
+        };
+
+        await Verify(label);
+
+        await Assert.That(label.IsDisposed).IsTrue();
     }
 
     #region ControlUsage
