@@ -1,5 +1,3 @@
-using System.Drawing.Imaging;
-
 namespace VerifyTests;
 
 public static class VerifyWinForms
