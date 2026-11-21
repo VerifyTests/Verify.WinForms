@@ -1,7 +1,3 @@
-using System.ComponentModel;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-
 namespace VerifyTests;
 
 public static class VerifyWinForms
@@ -68,12 +64,12 @@ public static class VerifyWinForms
         }
 
         var dropDown = (ToolStripDropDown) sender!;
-        SetWindowPos(dropDown.Handle, IntPtr.Zero, offScreen.X, offScreen.Y, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
+        SetWindowPos(dropDown.Handle, IntPtr.Zero, offScreen.X, offScreen.Y, 0, 0, noSize | noZorder | noActive);
     }
 
-    const uint SWP_NOSIZE = 0x0001;
-    const uint SWP_NOZORDER = 0x0004;
-    const uint SWP_NOACTIVATE = 0x0010;
+    const uint noSize = 0x0001;
+    const uint noZorder = 0x0004;
+    const uint noActive = 0x0010;
 
     [DllImport("user32.dll")]
     static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint flags);
