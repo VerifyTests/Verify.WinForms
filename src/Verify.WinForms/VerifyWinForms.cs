@@ -113,6 +113,7 @@ public static class VerifyWinForms
                 form.IsHandleCreated &&
                 wParam == form.Handle)
             {
+                // ReSharper disable once RedundantCast
                 return (IntPtr) 1;
             }
 
