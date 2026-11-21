@@ -10,6 +10,68 @@ public class TheTests
 
     #endregion
 
+    // A form is shown top-level, off screen and without being activated, so its Shown handlers
+    // have run when it is drawn, and it is hidden again after.
+    [Test]
+    public async Task FormIsShownOffScreenWithoutActivation()
+    {
+        var form = new Form
+        {
+            Width = 200,
+            Height = 100,
+            Text = "Shown"
+        };
+        var label = new Label
+        {
+            Text = "Not shown",
+            AutoSize = true
+        };
+        form.Controls.Add(label);
+        var activated = false;
+        var locations = new List<Point>();
+        form.Activated += (_, _) => activated = true;
+        form.Shown += (_, _) =>
+        {
+            label.Text = "Shown";
+            locations.Add(form.Location);
+        };
+        form.Paint += (_, _) => locations.Add(form.Location);
+
+        await Verify(form);
+
+        await Assert.That(activated).IsFalse();
+        await Assert.That(locations).IsNotEmpty();
+        await Assert.That(locations.Where(_ => _ != new Point(-20000, -20000))).IsEmpty();
+        await Assert.That(form.Visible).IsFalse();
+        await Assert.That(form.TopLevel).IsTrue();
+    }
+
+    // A form the test has already shown is drawn where it is, and left shown.
+    [Test]
+    public async Task AlreadyShownForm()
+    {
+        using var form = new QuietForm
+        {
+            Width = 200,
+            Height = 100,
+            Text = "Visible",
+            ShowInTaskbar = false,
+            StartPosition = FormStartPosition.Manual,
+            Location = new(-20000, -20000)
+        };
+        form.Show();
+
+        await Verify(form);
+
+        await Assert.That(form.Visible).IsTrue();
+        await Assert.That(form.TopLevel).IsTrue();
+    }
+
+    class QuietForm : Form
+    {
+        protected override bool ShowWithoutActivation => true;
+    }
+
     #region UserControlUsage
 
     [Test]

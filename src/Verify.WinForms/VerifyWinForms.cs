@@ -74,8 +74,78 @@ public static class VerifyWinForms
     [DllImport("user32.dll")]
     static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint flags);
 
+    // A form is shown as the top-level window it is, off screen and without being activated, so it
+    // is laid out, scaled and drawn as it appears on screen, and its Load and Shown handlers (and
+    // anything else it posts while being shown) have run. It is hidden again after. A form the
+    // caller has already shown is drawn where it is, and left shown.
     static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context) =>
-        Convert(() => FormToStream(form));
+        Convert(() =>
+        {
+            if (form.Visible)
+            {
+                Application.DoEvents();
+                return ControlToStream(form);
+            }
+
+            form.ShowInTaskbar = false;
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = offScreen;
+            ShowWithoutActivating(form);
+            try
+            {
+                Application.DoEvents();
+                return ControlToStream(form);
+            }
+            finally
+            {
+                form.Hide();
+            }
+        });
+
+    // Showing a form activates it, which takes the foreground from whatever window is in use, even
+    // from a test run in the background, and only the form itself can opt out (by overriding
+    // ShowWithoutActivation). So veto its activation with a hook on this thread while it is shown.
+    static void ShowWithoutActivating(Form form)
+    {
+        HookProc hook = (code, wParam, lParam) =>
+        {
+            if (code == cbtActivate &&
+                form.IsHandleCreated &&
+                wParam == form.Handle)
+            {
+                return (IntPtr) 1;
+            }
+
+            return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);
+        };
+        var hookHandle = SetWindowsHookEx(cbtHook, hook, IntPtr.Zero, GetCurrentThreadId());
+        try
+        {
+            form.Show();
+        }
+        finally
+        {
+            UnhookWindowsHookEx(hookHandle);
+            GC.KeepAlive(hook);
+        }
+    }
+
+    const int cbtHook = 5;
+    const int cbtActivate = 5;
+
+    delegate IntPtr HookProc(int code, IntPtr wParam, IntPtr lParam);
+
+    [DllImport("user32.dll")]
+    static extern IntPtr SetWindowsHookEx(int hookType, HookProc hook, IntPtr module, uint threadId);
+
+    [DllImport("user32.dll")]
+    static extern bool UnhookWindowsHookEx(IntPtr hookHandle);
+
+    [DllImport("user32.dll")]
+    static extern IntPtr CallNextHookEx(IntPtr hookHandle, int code, IntPtr wParam, IntPtr lParam);
+
+    [DllImport("kernel32.dll")]
+    static extern uint GetCurrentThreadId();
 
     static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context) =>
         Convert(() =>
@@ -92,15 +162,6 @@ public static class VerifyWinForms
             form.Show();
             return ControlToStream(control);
         });
-
-    static Stream FormToStream(Form form)
-    {
-        form.ShowInTaskbar = false;
-        form.TopLevel = false;
-        form.AutoScaleMode = AutoScaleMode.None;
-        form.Show();
-        return ControlToStream(form);
-    }
 
     static Stream ControlToStream(Control control)
     {

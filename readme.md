@@ -58,9 +58,11 @@ public Task FormUsage() =>
 
 With the state of the element being rendered as a verified file:
 
-[TheTests.FormUsage.Net.verified.png](/src/Tests/TheTests.FormUsage.Net.verified.png):
+[TheTests.FormUsage.DotNet.verified.png](/src/Tests/TheTests.FormUsage.DotNet.verified.png):
 
-<img src="/src/Tests/TheTests.FormUsage.Net.verified.png" width="200px">
+<img src="/src/Tests/TheTests.FormUsage.DotNet.verified.png" width="200px">
+
+A `Form` is shown as the top-level window it is, but off screen and without being activated (so it does not take the focus), and messages are pumped once. So it is laid out, scaled and drawn as it appears on screen, and its `Load` and `Shown` handlers have run. It is hidden again once rendered. A form that has already been shown is rendered where it is, and left shown.
 
 
 ### Menus and drop-downs
@@ -86,7 +88,7 @@ public Task ContextMenuStrip()
     return Verify(menu);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L21-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L83-L96' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -120,7 +122,7 @@ public Task ToolStripDropDownMenu()
     return Verify(button.DropDown);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L36-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-ToolStripDropDownMenu' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L98-L117' title='Snippet source file'>snippet source</a> | <a href='#snippet-ToolStripDropDownMenu' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
