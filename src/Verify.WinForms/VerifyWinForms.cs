@@ -4,6 +4,17 @@ public static class VerifyWinForms
 {
     public static bool Initialized { get; private set; }
 
+    /// <summary>
+    /// Registers converters so that verifying a <see cref="Form"/>, a <see cref="ToolStripDropDown"/>
+    /// (such as a <see cref="ContextMenuStrip"/> or a menu item's <see cref="ToolStripDropDownItem.DropDown"/>),
+    /// a <see cref="UserControl"/>, or any other <see cref="Control"/> renders it to a png.
+    /// Call once, before any verification, for example from a module initializer.
+    /// </summary>
+    /// <remarks>
+    /// Whatever is verified is disposed once it has been rendered, so there is no need to dispose it
+    /// in the test, and it cannot be used, or verified, again after the verification.
+    /// A form is disposed without being closed, so its FormClosing and FormClosed events are not raised.
+    /// </remarks>
     public static void Initialize()
     {
         if (Initialized)
@@ -25,30 +36,33 @@ public static class VerifyWinForms
 
     // A drop-down (ContextMenuStrip, a menu item's or drop-down button's DropDown, etc) is a popup
     // window of its own. Show it as one, off screen, so it is laid out and drawn (renderer,
-    // margins, border) as it appears on screen, then close it again.
+    // margins, border) as it appears on screen, then close and dispose it.
     static ConversionResult DropDownToImage(ToolStripDropDown dropDown, IReadOnlyDictionary<string, object> context) =>
         Convert(() =>
         {
-            dropDown.Opening += MoveOffScreen;
-            try
+            using (dropDown)
             {
-                // Showing at the off screen point, not just Show(), also stops WinForms moving the
-                // window back to the point it was last shown at once it is visible.
-                dropDown.Show(offScreen);
-            }
-            finally
-            {
-                dropDown.Opening -= MoveOffScreen;
-            }
+                dropDown.Opening += MoveOffScreen;
+                try
+                {
+                    // Showing at the off screen point, not just Show(), also stops WinForms moving
+                    // the window back to the point it was last shown at once it is visible.
+                    dropDown.Show(offScreen);
+                }
+                finally
+                {
+                    dropDown.Opening -= MoveOffScreen;
+                }
 
-            try
-            {
-                Application.DoEvents();
-                return ControlToStream(dropDown);
-            }
-            finally
-            {
-                dropDown.Close();
+                try
+                {
+                    Application.DoEvents();
+                    return ControlToStream(dropDown);
+                }
+                finally
+                {
+                    dropDown.Close();
+                }
             }
         });
 
@@ -76,29 +90,24 @@ public static class VerifyWinForms
 
     // A form is shown as the top-level window it is, off screen and without being activated, so it
     // is laid out, scaled and drawn as it appears on screen, and its Load and Shown handlers (and
-    // anything else it posts while being shown) have run. It is hidden again after. A form the
-    // caller has already shown is drawn where it is, and left shown.
+    // anything else it posts while being shown) have run. A form the caller has already shown is
+    // drawn where it is. Either way it is disposed after, without raising FormClosing or
+    // FormClosed, since it was never closed.
     static ConversionResult FormToImage(Form form, IReadOnlyDictionary<string, object> context) =>
         Convert(() =>
         {
-            if (form.Visible)
+            using (form)
             {
-                Application.DoEvents();
-                return ControlToStream(form);
-            }
+                if (!form.Visible)
+                {
+                    form.ShowInTaskbar = false;
+                    form.StartPosition = FormStartPosition.Manual;
+                    form.Location = offScreen;
+                    ShowWithoutActivating(form);
+                }
 
-            form.ShowInTaskbar = false;
-            form.StartPosition = FormStartPosition.Manual;
-            form.Location = offScreen;
-            ShowWithoutActivating(form);
-            try
-            {
                 Application.DoEvents();
                 return ControlToStream(form);
-            }
-            finally
-            {
-                form.Hide();
             }
         });
 
@@ -148,6 +157,7 @@ public static class VerifyWinForms
     [DllImport("kernel32.dll")]
     static extern uint GetCurrentThreadId();
 
+    // Disposing the form the control is added to also disposes the control.
     static ConversionResult ControlToImage(Control control, IReadOnlyDictionary<string, object> context) =>
         Convert(() =>
         {

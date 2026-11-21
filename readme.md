@@ -62,12 +62,12 @@ With the state of the element being rendered as a verified file:
 
 <img src="/src/Tests/TheTests.FormUsage.DotNet.verified.png" width="200px">
 
-A `Form` is shown as the top-level window it is, but off screen and without being activated (so it does not take the focus), and messages are pumped once. So it is laid out, scaled and drawn as it appears on screen, and its `Load` and `Shown` handlers have run. It is hidden again once rendered. A form that has already been shown is rendered where it is, and left shown.
+A `Form` is shown as the top-level window it is, but off screen and without being activated (so it does not take the focus), and messages are pumped once. So it is laid out, scaled and drawn as it appears on screen, and its `Load` and `Shown` handlers have run. A form that has already been shown is rendered where it is. Either way it is then [disposed](#disposal), without being closed.
 
 
 ### Menus and drop-downs
 
-Any `ToolStripDropDown` can be verified: a `ContextMenuStrip`, the `DropDown` of a `ToolStripMenuItem` or `ToolStripDropDownButton`, or a plain `ToolStripDropDown`. It is shown as the popup window it is, but off screen, so it is laid out and drawn (renderer, margins, border) as it appears on screen. It is closed again once rendered.
+Any `ToolStripDropDown` can be verified: a `ContextMenuStrip`, the `DropDown` of a `ToolStripMenuItem` or `ToolStripDropDownButton`, or a plain `ToolStripDropDown`. It is shown as the popup window it is, but off screen, so it is laid out and drawn (renderer, margins, border) as it appears on screen. It is then closed and [disposed](#disposal).
 
 
 #### ContextMenuStrip
@@ -88,7 +88,7 @@ public Task ContextMenuStrip()
     return Verify(menu);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L83-L96' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L87-L100' title='Snippet source file'>snippet source</a> | <a href='#snippet-ContextMenuStrip' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -122,7 +122,7 @@ public Task ToolStripDropDownMenu()
     return Verify(button.DropDown);
 }
 ```
-<sup><a href='/src/Tests/TheTests.cs#L98-L117' title='Snippet source file'>snippet source</a> | <a href='#snippet-ToolStripDropDownMenu' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/src/Tests/TheTests.cs#L102-L121' title='Snippet source file'>snippet source</a> | <a href='#snippet-ToolStripDropDownMenu' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 With the state of the element being rendered as a verified file:
@@ -130,6 +130,11 @@ With the state of the element being rendered as a verified file:
 [TheTests.ToolStripDropDownMenu.DotNet.verified.png](/src/Tests/TheTests.ToolStripDropDownMenu.DotNet.verified.png):
 
 <img src="/src/Tests/TheTests.ToolStripDropDownMenu.DotNet.verified.png" width="200px">
+
+
+### Disposal
+
+Whatever is verified (a `Form`, a `ToolStripDropDown`, a `UserControl`, or any other `Control`) is disposed once it has been rendered. So there is no need to dispose it in the test, and it cannot be used, or verified, again after the `Verify` call. A form is disposed without being closed, so its `FormClosing` and `FormClosed` events are not raised.
 
 
 ## OS specific rendering
